@@ -2,7 +2,6 @@
     grid-area: c;
     background-color: blue;
 }
-
-.item {
-    color: green;
+.content img {
+    max-width: 50%;
 }
