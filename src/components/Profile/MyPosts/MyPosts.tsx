@@ -9,10 +9,10 @@ const MyPosts = () => {
             new post
         </div>
         <div className={s.posts}>
-            <Post/>
-            <Post/>
-            <Post/>
-            <Post/>
+            <Post message="Hi/ How are you?" like={5} />
+            <Post message="It second post" like={10} />
+            <Post message="It third post" like={15} />
+            <Post message="It four post" like={20} />
         </div>
     </div>)
 }
