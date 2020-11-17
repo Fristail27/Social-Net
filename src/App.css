@@ -16,3 +16,6 @@
     grid-area: c;
     background-color: blue;
 }
+.app-wrapper-content img {
+    max-width: 50%;
+}
