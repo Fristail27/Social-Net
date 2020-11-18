@@ -1,7 +1,6 @@
 .app-wrapper {
     margin: 0 auto;
     display: grid;
-    width: 1980px;
 
     grid-template-areas:
     "h h"
@@ -17,5 +16,5 @@
     background-color: cornflowerblue;
 }
 .app-wrapper-content img {
-    max-width: 50%;
+    width: 100%;
 }

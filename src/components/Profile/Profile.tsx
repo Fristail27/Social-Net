@@ -1,15 +1,11 @@
 import React from 'react';
 import s from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from './ProfileInfo/ProfileInfo';
 
 const Profile = (props:any) => {
     return <div>
-        <div>
-            <img src="https://caspian.travel/upload/tours/sulak_derbent/sul_derb_slide_1.jpg" alt=""/>
-        </div>
-        <div>
-            ava+description
-        </div>
+        <ProfileInfo />
         <MyPosts/>
     </div>
 }
