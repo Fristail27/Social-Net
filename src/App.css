@@ -14,7 +14,7 @@
 
 .app-wrapper-content {
     grid-area: c;
-    background-color: blue;
+    background-color: cornflowerblue;
 }
 .app-wrapper-content img {
     max-width: 50%;
