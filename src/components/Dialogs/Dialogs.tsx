@@ -14,7 +14,7 @@ export type messagesDataType = {
 }
 
 type dialogsPropsType = {
-    messages:Array<messagesDataType>,
+    messages: Array<messagesDataType>,
     dialogs: Array<dialogsDataType>,
 }
 
