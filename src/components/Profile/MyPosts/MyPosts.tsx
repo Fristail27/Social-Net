@@ -9,7 +9,13 @@ type myPostsPropsType = {
 
 const MyPosts = (props: myPostsPropsType) => {
 
-    let postElements = props.posts.map((p: postsType) => <Post message={p.post} like={p.likesCount}/> )
+    let postElements = props.posts.map((p: postsType) => <Post key={p.id} message={p.post} like={p.likesCount}/> )
+
+    let newPostElement :any = React.createRef();
+    let addPost = () => {
+        let text = newPostElement.current.value;
+        alert("Hello");
+    }
 
     return (
         <div className={s.postsBlock}>
@@ -17,13 +23,15 @@ const MyPosts = (props: myPostsPropsType) => {
             <div>
                 new post
                 <div>
-                    <textarea></textarea>
+                    <textarea ref={newPostElement}></textarea>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
-            <div className={s.posts}>{postElements}</div>
+            <div className={s.posts}>
+                {postElements}
+            </div>
         </div>
     )
 }
