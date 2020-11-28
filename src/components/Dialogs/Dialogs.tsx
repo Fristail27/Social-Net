@@ -28,7 +28,8 @@ const Dialogs = (props: dialogsPropsType) => {
     let newMessageElement :any = React.createRef();
 
     let addMessage = () => {
-        console.log("123");
+        let text = newMessageElement.current.value;
+        console.log(text);
     }
 
     return (
