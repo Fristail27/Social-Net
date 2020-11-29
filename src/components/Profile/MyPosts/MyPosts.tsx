@@ -5,19 +5,22 @@ import { postsType } from '../Profile';
 import {addPost} from "../../../redux/state";
 
 type myPostsPropsType = {
-    posts: Array<postsType>,
-    addPost: (post :string) => void,
+    profilePage: any,
+    addPost: () => void,
+    updateNewPostText: (text :string) => void,
 }
 
 const MyPosts = (props: myPostsPropsType) => {
 
-    let postElements = props.posts.map((p: postsType) => <Post key={p.id} message={p.post} like={p.likesCount}/> )
+    let postElements = props.profilePage.posts.map((p: postsType) => <Post key={p.id} message={p.post} like={p.likesCount}/> )
 
     let newPostElement :any = React.createRef();
     let addPostClick = () => {
-        let text = newPostElement.current.value;
-        props.addPost(text);
-        newPostElement.current.value = "";
+        props.addPost();
+    }
+
+    let onPostChange = () => {
+        props.updateNewPostText(newPostElement.current.value)
     }
 
     return (
@@ -26,7 +29,7 @@ const MyPosts = (props: myPostsPropsType) => {
             <div>
                 new post
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onPostChange} ref={newPostElement} value={props.profilePage.newPostText}></textarea>
                 </div>
                 <div>
                     <button onClick={addPostClick}>Add post</button>

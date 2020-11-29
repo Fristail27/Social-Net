@@ -11,14 +11,15 @@ export type postsType = {
 };
 
 type profilePropsType = {
-    posts: Array<postsType>,
-    addPost: (post:string) => void,
+    profilePage: any,
+    addPost: () => void,
+    updateNewPostText: (text :string) => void,
 };
 
 const Profile = (props: profilePropsType) => {
     return <div>
         <ProfileInfo />
-        <MyPosts addPost={props.addPost} posts={props.posts}/>
+        <MyPosts addPost={props.addPost} updateNewPostText={props.updateNewPostText} profilePage={props.profilePage}/>
     </div>
 };
 

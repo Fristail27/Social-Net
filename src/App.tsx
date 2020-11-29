@@ -17,7 +17,8 @@ type appPropsType = {
             dialogs: Array<dialogsDataType>,
         },
     },
-    addPost: (post :string) => void,
+    addPost: () => void,
+    updateNewPostText: (text :string) => void,
 }
 
 function App(props: appPropsType) {
@@ -33,7 +34,7 @@ function App(props: appPropsType) {
             <div className="app-wrapper-content">
                 <Route path="/dialogs" component={someComponent}/> {/* 1 вариант*/}
                 <Route path="/profile"
-                       render={() => <Profile addPost={props.addPost} posts={props.state.profilePage.posts}/>}/> {/* 2 вариант*/}
+                       render={() => <Profile addPost={props.addPost} updateNewPostText={props.updateNewPostText} profilePage={props.state.profilePage}/>}/> {/* 2 вариант*/}
             </div>
         </div>
 

@@ -5,6 +5,7 @@ import {rerenderEntireTree} from "../render";
 export type stateType = {
     profilePage: {
         posts: Array<postsType>,
+        newPostText: string
     },
     messagePage: {
         messages: Array<messagesDataType>,
@@ -19,6 +20,7 @@ let state :stateType = {
             {id:2, post:"It second post", likesCount: 23,},
             {id:3, post:"It third post", likesCount: 23,},
             {id:4, post:"It four post", likesCount: 23,},],
+        newPostText: "LOLOLOLO"
         },
     messagePage: {
         messages: [
@@ -36,13 +38,19 @@ let state :stateType = {
 
 };
 
-export let addPost = (postMessage :string) => {
+export let addPost = () => {
     let newPost = {
         id:5,
-        post: postMessage,
+        post: state.profilePage.newPostText,
         likesCount: 0,
     }
-    state.profilePage.posts.push(newPost)
+    state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = "";
+    rerenderEntireTree(state);
+}
+
+export let updateNewPostText = (newText :string) => {
+    state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
 }
 
