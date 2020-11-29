@@ -1,5 +1,6 @@
 import {postsType} from "../components/Profile/Profile";
 import {dialogsDataType, messagesDataType} from "../components/Dialogs/Dialogs";
+import {rerenderEntireTree} from "../render";
 
 export type stateType = {
     profilePage: {
@@ -42,6 +43,7 @@ export let addPost = (postMessage :string) => {
         likesCount: 0,
     }
     state.profilePage.posts.push(newPost)
+    rerenderEntireTree(state);
 }
 
 export default state;
