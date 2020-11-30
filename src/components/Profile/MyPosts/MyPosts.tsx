@@ -5,8 +5,7 @@ import { postsType } from '../Profile';
 
 type myPostsPropsType = {
     profilePage: any,
-    addPost: () => void,
-    updateNewPostText: (text :string) => void,
+    dispatch: (action :object) => void,
 }
 
 const MyPosts = (props: myPostsPropsType) => {
@@ -15,12 +14,13 @@ const MyPosts = (props: myPostsPropsType) => {
 
     let newPostElement :any = React.createRef();
     let addPostClick = () => {
-        props.addPost();
-    }
+        props.dispatch({type: "ADD-POST"});
+    };
 
     let onPostChange = () => {
-        props.updateNewPostText(newPostElement.current.value)
-    }
+        let action = {type: "UPDATE=NEW-POST-TEXT", newText: newPostElement.current.value};
+        props.dispatch(action);
+    };
 
     return (
         <div className={s.postsBlock}>
