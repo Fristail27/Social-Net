@@ -1,7 +1,8 @@
-import React from "react";
+import React, {ChangeEvent, useState} from "react";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
+import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/state";
 
 export type dialogsDataType = {
     id: number,
@@ -14,22 +15,27 @@ export type messagesDataType = {
 }
 
 type dialogsPropsType = {
-    messages: Array<messagesDataType>,
-    dialogs: Array<dialogsDataType>,
+    messagePage: any,
+    dispatch: (action :object) => void,
 }
 
 const Dialogs = (props: dialogsPropsType) => {
 
-    let dialogElements = props.dialogs.map((el :dialogsDataType) => {
+    let dialogElements = props.messagePage.dialogs.map((el :dialogsDataType) => {
         return <DialogItem key={el.id} name={el.name} id={el.id}/>
     })
-    let messagesElements = props.messages.map((mes :messagesDataType ) =>  <Message key={mes.id} message={mes.message}/>)
+    let messagesElements = props.messagePage.messages.map((mes :messagesDataType ) =>  <Message key={mes.id} message={mes.message}/>)
 
     let newMessageElement :any = React.createRef();
 
-    let addMessage = () => {
+    let onMessageChange = () => {
         let text = newMessageElement.current.value;
-        console.log(text);
+        let action = updateNewMessageTextActionCreator(text);
+        props.dispatch(action);
+    }
+
+    let addMessage = () => {
+        props.dispatch(addMessageActionCreator());
     }
 
     return (
@@ -42,7 +48,7 @@ const Dialogs = (props: dialogsPropsType) => {
                     {messagesElements}
                     <div className={s.adding}>
                         <div>
-                            <textarea ref={newMessageElement}></textarea>
+                            <textarea value={props.messagePage.newMessageText} ref={newMessageElement} onChange={onMessageChange}></textarea>
                         </div>
                         <div>
                             <button onClick={addMessage}>Send</button>

@@ -21,16 +21,13 @@ type appPropsType = {
 
 function App(props: appPropsType) {
 
-    let someComponent = () => <Dialogs dialogs={props.state.messagePage.dialogs}
-                                       messages={props.state.messagePage.messages}/>
-
     return (
 
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path="/dialogs" component={someComponent}/> {/* 1 вариант*/}
+                <Route path="/dialogs" render={() => <Dialogs dispatch={props.dispatch} messagePage={props.state.messagePage}/> }/> {/* 1 вариант*/}
                 <Route path="/profile"
                        render={() => <Profile dispatch={props.dispatch} profilePage={props.state.profilePage}/>}/> {/* 2 вариант*/}
             </div>

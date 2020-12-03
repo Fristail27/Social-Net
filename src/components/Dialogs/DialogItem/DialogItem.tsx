@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import s from "./../Dialogs.module.css"
 import {NavLink} from "react-router-dom";
 
