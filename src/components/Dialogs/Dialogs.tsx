@@ -1,22 +1,18 @@
-import React, {ChangeEvent, useState} from "react";
+import React from "react";
 import s from "./Dialogs.module.css"
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/state";
-
-export type dialogsDataType = {
-    id: number,
-    name:string,
-}
-
-export type messagesDataType = {
-    id: number,
-    message: string,
-}
+import {
+    ActionType,
+    addMessageActionCreator,
+    dialogsDataType,
+    messagesDataType,
+    updateNewMessageTextActionCreator
+} from "../../redux/state";
 
 type dialogsPropsType = {
     messagePage: any,
-    dispatch: (action :object) => void,
+    dispatch: (action :ActionType) => void,
 }
 
 const Dialogs = (props: dialogsPropsType) => {
@@ -26,10 +22,10 @@ const Dialogs = (props: dialogsPropsType) => {
     })
     let messagesElements = props.messagePage.messages.map((mes :messagesDataType ) =>  <Message key={mes.id} message={mes.message}/>)
 
-    let newMessageElement :any = React.createRef();
+    let newMessageElement = React.createRef<HTMLTextAreaElement>();
 
     let onMessageChange = () => {
-        let text = newMessageElement.current.value;
+        let text = newMessageElement.current?.value as string;
         let action = updateNewMessageTextActionCreator(text);
         props.dispatch(action);
     }
