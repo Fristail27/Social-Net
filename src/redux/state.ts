@@ -11,7 +11,7 @@ export type dialogsDataType = {
     id: number,
     name: string,
 };
-type StateType = {
+export type StateType = {
     profilePage: {
         posts: Array<postsType>,
         newPostText: string,
@@ -23,17 +23,19 @@ type StateType = {
     },
 };
 export type ActionType = {
-    type: string,
+    type: TypeActionType,
     newText?: string,
     newMessageText?: string,
 };
+type TypeActionType = typeof ADD_POST | typeof UPDATE_NEW_POST_TEXT | typeof ADD_MESSAGE | typeof UPDATE_NEW_MESSAGE_TEXT;
 export type StoreType = {
     _state: StateType,
-    _callSubscriber: (a?: any) => void,
-    getState: () => void,
-    subscribe: (a: any) => void,
+    _callSubscriber: (a? :StateType) => void,
+    getState: () => StateType,
+    subscribe: (a: (a: StateType) => void) => void,
     dispatch: (a: ActionType) => void,
 };
+
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE=NEW-POST-TEXT";
 const ADD_MESSAGE = "ADD_MESSAGE";
@@ -63,7 +65,6 @@ let store: StoreType = {
             ],
             newMessageText: "",
         },
-
     },
     _callSubscriber() {
     },
@@ -102,13 +103,13 @@ let store: StoreType = {
     },
 
 };
-export const addPostActionCreator = () => ({type: ADD_POST});
-export const updateNewPostTextActionCreator = (text: string) => ({
+export const addPostActionCreator = () :ActionType => ({type: ADD_POST});
+export const updateNewPostTextActionCreator = (text: string) :ActionType => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text,
 });
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-export const updateNewMessageTextActionCreator = (text: string) => ({
+export const addMessageActionCreator = () :ActionType => ({type: ADD_MESSAGE});
+export const updateNewMessageTextActionCreator = (text: string) :ActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newMessageText: text
 });

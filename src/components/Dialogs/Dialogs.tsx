@@ -13,27 +13,23 @@ import {
 type dialogsPropsType = {
     messagePage: any,
     dispatch: (action :ActionType) => void,
-}
+};
 
 const Dialogs = (props: dialogsPropsType) => {
 
     let dialogElements = props.messagePage.dialogs.map((el :dialogsDataType) => {
         return <DialogItem key={el.id} name={el.name} id={el.id}/>
-    })
+    });
     let messagesElements = props.messagePage.messages.map((mes :messagesDataType ) =>  <Message key={mes.id} message={mes.message}/>)
-
     let newMessageElement = React.createRef<HTMLTextAreaElement>();
-
     let onMessageChange = () => {
         let text = newMessageElement.current?.value as string;
         let action = updateNewMessageTextActionCreator(text);
         props.dispatch(action);
-    }
-
+    };
     let addMessage = () => {
         props.dispatch(addMessageActionCreator());
-    }
-
+    };
     return (
         <div>
             <div className={s.dialogs}>
