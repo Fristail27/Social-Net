@@ -5,25 +5,15 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
-import {ActionType, dialogsDataType, messagesDataType, postsType} from "./redux/state";
+import {ActionType, dialogsDataType, messagesDataType, postsType, StateType} from "./redux/state";
 
 type appPropsType = {
-    state: {
-        profilePage: {
-            posts: Array<postsType>,
-        },
-        messagePage: {
-            messages: Array<messagesDataType>,
-            dialogs: Array<dialogsDataType>,
-        },
-    },
-   dispatch: (action :ActionType) => void,
+    state: StateType,
+    dispatch: (action :ActionType) => void,
 }
 
 function App(props: appPropsType) {
-
     return (
-
         <div className='app-wrapper'>
             <Header/>
             <Navbar/>
@@ -33,7 +23,6 @@ function App(props: appPropsType) {
                        render={() => <Profile dispatch={props.dispatch} profilePage={props.state.profilePage}/>}/> {/* 2 вариант*/}
             </div>
         </div>
-
     );
 }
 

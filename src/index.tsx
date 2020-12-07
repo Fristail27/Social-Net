@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import store, {StateType} from "./redux/state";
+import {StateType} from "./redux/state";
+import store from "./redux/redux-store"
 import {BrowserRouter} from "react-router-dom";
 
 
@@ -16,7 +17,7 @@ let rerenderEntireTree = (state :StateType) => {ReactDOM.render(
 );};
 
 rerenderEntireTree(store.getState());
-store.subscribe(rerenderEntireTree);
+store.subscribe(() => rerenderEntireTree(store.getState()));
 
 
 

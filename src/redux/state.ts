@@ -25,7 +25,9 @@ export type StateType = {
         dialogs: Array<dialogsDataType>,
         newMessageText: string,
     },
-    sidebar: {},
+    sidebarPage: {
+
+    },
 };
 export type ActionType = {
     type: TypeActionType,
@@ -70,7 +72,7 @@ let store: StoreType = {
             ],
             newMessageText: "",
         },
-        sidebar: {},
+        sidebarPage: {},
     },
     _callSubscriber() {
     },
@@ -83,7 +85,7 @@ let store: StoreType = {
     dispatch(action: ActionType) {
         this._state.profilePage = profileReducer(this._state.profilePage, action);
         this._state.messagePage = dialogsReducer(this._state.messagePage, action);
-        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
+        this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action);
         this._callSubscriber(this._state);
     }
 };
