@@ -6,10 +6,12 @@ import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
 import {Route} from 'react-router-dom';
 import {ActionType, dialogsDataType, messagesDataType, postsType, StateType} from "./redux/state";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type appPropsType = {
     state: StateType,
     dispatch: (action :ActionType) => void,
+    store:any,
 }
 
 function App(props: appPropsType) {
@@ -18,9 +20,9 @@ function App(props: appPropsType) {
             <Header/>
             <Navbar/>
             <div className="app-wrapper-content">
-                <Route path="/dialogs" render={() => <Dialogs dispatch={props.dispatch} messagePage={props.state.messagePage}/> }/> {/* 1 вариант*/}
+                <Route path="/dialogs" render={() => <DialogsContainer store={props.store} /> }/> {/* 1 вариант*/}
                 <Route path="/profile"
-                       render={() => <Profile dispatch={props.dispatch} profilePage={props.state.profilePage}/>}/> {/* 2 вариант*/}
+                       render={() => <Profile store={props.store} />}/> {/* 2 вариант*/}
             </div>
         </div>
     );

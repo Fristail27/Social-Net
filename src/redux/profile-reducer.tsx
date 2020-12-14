@@ -1,3 +1,5 @@
+import {ActionType} from "./state";
+
 export const ADD_POST = "ADD-POST";
 export const UPDATE_NEW_POST_TEXT = "UPDATE=NEW-POST-TEXT";
 
@@ -29,8 +31,8 @@ const profileReducer = (state: any = initialState, action: any): any => {
     }
 };
 
-export const addPostActionCreator = (): any => ({type: ADD_POST});
-export const updateNewPostTextActionCreator = (text: string): any => ({
+export const addPostActionCreator = ():ActionType => ({type: ADD_POST});
+export const updateNewPostTextActionCreator = (text: string):ActionType => ({
     type: UPDATE_NEW_POST_TEXT,
     newText: text,
 });

@@ -1,3 +1,5 @@
+import {ActionType} from "./state";
+
 export const ADD_MESSAGE = "ADD_MESSAGE";
 export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
 
@@ -34,8 +36,8 @@ const dialogsReducer = (state: any = initialState, action: any): any => {
     }
 };
 
-export const addMessageActionCreator = (): any => ({type: ADD_MESSAGE});
-export const updateNewMessageTextActionCreator = (text: string): any => ({
+export const addMessageActionCreator = (): ActionType => ({type: ADD_MESSAGE});
+export const updateNewMessageTextActionCreator = (text: string): ActionType => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     newMessageText: text
 });
