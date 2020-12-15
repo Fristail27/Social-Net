@@ -1,17 +1,9 @@
 import React from 'react';
 import s from "./MyPosts.module.css"
 import Post from "./Post/Post";
-import {ActionType, postsType} from "../../../redux/state";
+import {postsType} from "../../../redux/state";
 
-type myPostsPropsType = {
-    profilePage: any,
-    addPostClick: () => void,
-    updateNewPostTextActionCreator:(text:string) => void,
-};
-
-
-
-const MyPosts = (props: myPostsPropsType) => {
+const MyPosts = (props: any) => {
 
     let postElements = props.profilePage.posts.map((p: postsType) => <Post key={p.id} message={p.post} like={p.likesCount}/> )
 
