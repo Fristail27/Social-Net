@@ -19,7 +19,6 @@ let rerenderEntireTree = () => {ReactDOM.render(
 );};
 
 rerenderEntireTree();
-store.subscribe(() => rerenderEntireTree());
 
 
 
