@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="607d4313-b442-440c-9179-968cbdad191e" name="Default Changelist" comment="add react-redux">
+    <list default="true" id="607d4313-b442-440c-9179-968cbdad191e" name="Default Changelist" comment="use copeState for reducers">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPostsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Profile/MyPosts/MyPostsContainer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/dialogs-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/dialogs-reducer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/profile-reducer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/redux/redux-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.ts" afterDir="false" />
@@ -55,7 +55,9 @@
       <workItem from="1608468962820" duration="605000" />
       <workItem from="1608479744278" duration="210000" />
       <workItem from="1609093045402" duration="730000" />
-      <workItem from="1609179204917" duration="2908000" />
+      <workItem from="1609179204917" duration="3922000" />
+      <workItem from="1609254880819" duration="26000" />
+      <workItem from="1609513890287" duration="3038000" />
     </task>
     <task id="LOCAL-00001" summary="add react-redux">
       <created>1608399592956</created>
@@ -64,7 +66,14 @@
       <option name="project" value="LOCAL" />
       <updated>1608399592956</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="use copeState for reducers">
+      <created>1609182452199</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1609182452199</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -96,6 +105,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add react-redux" />
-    <option name="LAST_COMMIT_MESSAGE" value="add react-redux" />
+    <MESSAGE value="use copeState for reducers" />
+    <option name="LAST_COMMIT_MESSAGE" value="use copeState for reducers" />
   </component>
 </project>
