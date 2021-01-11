@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="607d4313-b442-440c-9179-968cbdad191e" name="Default Changelist" comment="refactoring reducers">
-      <change afterPath="$PROJECT_DIR$/src/components/Users/Users.module.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/redux/users-reducer.tsx" afterDir="false" />
+    <list default="true" id="607d4313-b442-440c-9179-968cbdad191e" name="Default Changelist" comment="userePage">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/redux-store.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/redux-store.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dialogs/DialogsContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/Users.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/Users.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Users/UsersContainer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/users-reducer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/users-reducer.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +31,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/redux" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -67,7 +66,12 @@
       <workItem from="1609513890287" duration="3191000" />
       <workItem from="1609702991060" duration="21000" />
       <workItem from="1609703688513" duration="974000" />
-      <workItem from="1609761260836" duration="3923000" />
+      <workItem from="1609761260836" duration="4005000" />
+      <workItem from="1609781096657" duration="20000" />
+      <workItem from="1610223504132" duration="1109000" />
+      <workItem from="1610228089947" duration="3000" />
+      <workItem from="1610259868697" duration="12000" />
+      <workItem from="1610387805422" duration="3735000" />
     </task>
     <task id="LOCAL-00001" summary="add react-redux">
       <created>1608399592956</created>
@@ -90,7 +94,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609517127325</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="userePage">
+      <created>1609765260114</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1609765260114</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +135,7 @@
     <MESSAGE value="add react-redux" />
     <MESSAGE value="use copeState for reducers" />
     <MESSAGE value="refactoring reducers" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactoring reducers" />
+    <MESSAGE value="userePage" />
+    <option name="LAST_COMMIT_MESSAGE" value="userePage" />
   </component>
 </project>

@@ -4,20 +4,33 @@ export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
 export const SET_USERS = "SET_USERS";
 
-let initialState = {
+type UserType = {
+    id: number | string
+    photos: string
+    followed: boolean
+    fullName: string
+    status: string
+    location: {city: string, country:string},
+
+}
+type UsersStateType = {
+    users: UserType[]
+}
+
+let initialState :UsersStateType = {
     users: [
-        {id: 1, photoURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: false, fullName: "Dmitry", status: "lol", location: {city: "Minsk", country:"Belarus"},},
-        {id: 2, photoURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: true, fullName: "Alex", status: "lol1", location: {city: "Moskow", country:"Russia"},},
-        {id: 3, photoURL:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: false, fullName: "ant", status: "lol2", location: {city: "Minsk", country:"Belarus"},},
+        {id: 1, photos:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: false, fullName: "Dmitry", status: "lol", location: {city: "Minsk", country:"Belarus"},},
+        {id: 2, photos:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: true, fullName: "Alex", status: "lol1", location: {city: "Moskow", country:"Russia"},},
+        {id: 3, photos:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: false, fullName: "ant", status: "lol2", location: {city: "Minsk", country:"Belarus"},},
     ]
 };
 
-const usersReducer = (state: any = initialState, action: any): any => {
+const usersReducer = (state: UsersStateType = initialState, action: any): UsersStateType => {
     switch (action.type) {
         case FOLLOW:
             return  {
                 ...state,
-                users: state.users.map((u:any) => {
+                users: state.users.map((u:UserType) => {
                     if(u.id === action.userId) {
                         return {...u, followed: true}
                     }
@@ -27,7 +40,7 @@ const usersReducer = (state: any = initialState, action: any): any => {
         case UNFOLLOW:
             return {
                 ...state,
-                users: state.users.map((u:any) => {
+                users: state.users.map((u:UserType) => {
                     if(u.id === action.userId) {
                         return {...u, followed: false}
                     }
@@ -35,14 +48,14 @@ const usersReducer = (state: any = initialState, action: any): any => {
                 }),
             }
         case  SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: [...action.users]}
         default:
             return state;
     }
 };
 
-export const followAC = (userId:any):any => ({type: FOLLOW, userId});
-export const unfollowAC = (userId:any):any => ({type: UNFOLLOW, userId});
+export const followAC = (userId:string):any => ({type: FOLLOW, userId});
+export const unfollowAC = (userId:string):any => ({type: UNFOLLOW, userId});
 export const setUsersAC = (users:any):any => ({type: SET_USERS, users});
 
 export default usersReducer;
