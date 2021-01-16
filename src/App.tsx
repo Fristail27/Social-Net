@@ -14,7 +14,7 @@ function App() {
             <Navbar/>
             <div className="app-wrapper-content">
                 <Route path="/dialogs" render={() => <DialogsContainer /> }/> {/* 1 вариант*/}
-                <Route path="/profile" render={() => <ProfileContainer  />}/> {/* 2 вариант*/}
+                <Route path="/profile/:userId?" render={() => <ProfileContainer  />}/> {/* 2 вариант*/}
                 <Route path="/users" render={() => <UsersContainer/> }/>
             </div>
         </div>
