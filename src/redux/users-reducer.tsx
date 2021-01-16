@@ -3,6 +3,9 @@ import {ActionType} from "./state";
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
 export const SET_USERS = "SET_USERS";
+export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
+export const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
+
 
 type UserType = {
     id: number | string
@@ -15,14 +18,16 @@ type UserType = {
 }
 type UsersStateType = {
     users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage:number
 }
 
 let initialState :UsersStateType = {
-    users: [
-        {id: 1, photos:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: false, fullName: "Dmitry", status: "lol", location: {city: "Minsk", country:"Belarus"},},
-        {id: 2, photos:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: true, fullName: "Alex", status: "lol1", location: {city: "Moskow", country:"Russia"},},
-        {id: 3, photos:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Haselmaus.JPG/240px-Haselmaus.JPG", followed: false, fullName: "ant", status: "lol2", location: {city: "Minsk", country:"Belarus"},},
-    ]
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
 };
 
 const usersReducer = (state: UsersStateType = initialState, action: any): UsersStateType => {
@@ -49,6 +54,10 @@ const usersReducer = (state: UsersStateType = initialState, action: any): UsersS
             }
         case  SET_USERS:
             return {...state, users: [...action.users]}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage:action.currentPage}
+        case SET_TOTAL_USERS_COUNT:
+            return {...state, totalUsersCount:action.totalUsersCount}
         default:
             return state;
     }
@@ -57,5 +66,9 @@ const usersReducer = (state: UsersStateType = initialState, action: any): UsersS
 export const followAC = (userId:string):any => ({type: FOLLOW, userId});
 export const unfollowAC = (userId:string):any => ({type: UNFOLLOW, userId});
 export const setUsersAC = (users:any):any => ({type: SET_USERS, users});
+export const setCurrentPageAC = (currentPage:number):any => ({type: SET_CURRENT_PAGE, currentPage});
+export const setUsersTotalCountAC = (totalUsersCount:number):any => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
+
+
 
 export default usersReducer;
