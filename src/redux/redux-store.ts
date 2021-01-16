@@ -13,5 +13,8 @@ let reducers = combineReducers({
 
 let store = createStore(reducers);
 
+//@ts-ignore
+window.store=store
+
 
 export default store;
