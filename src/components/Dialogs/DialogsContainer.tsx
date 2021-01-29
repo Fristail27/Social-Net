@@ -1,12 +1,11 @@
-import React from "react";
 import {addMessageActionCreator, updateNewMessageTextActionCreator} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {StateType} from "../../redux/state";
 
-let mapStateToProps = (state:StateType) => {
+let mapStateToProps = (state:any) => {
     return {
-        messagePage: state.messagePage
+        messagePage: state.messagePage,
+        isAuth: state.auth.isAuth
     }
 }
 let mapDispatchToProps = (dispatch: (a:any)=>void) => {

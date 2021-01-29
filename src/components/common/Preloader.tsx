@@ -1,10 +1,10 @@
 import React from "react";
 import preloader from "../../Assets/images/25.svg";
 
-const Preloader = (props:any) => {
+const Preloader = () => {
     return (
         <div>
-            <img style={{width:100,}} src={preloader}/>
+            <img style={{width:100,}} alt="no" src={preloader}/>
         </div>
     )
 }

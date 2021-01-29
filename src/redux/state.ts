@@ -1,6 +1,7 @@
 import profileReducer, {ADD_POST, UPDATE_NEW_POST_TEXT} from "./profile-reducer";
 import dialogsReducer, {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {AuthStateType} from "./auth-reducer";
 
 export type postsType = {
     id: number,
@@ -26,8 +27,7 @@ export type StateType = {
         newMessageText: string,
     },
     sidebarPage: {
-
-    },
+    }
 };
 export type ActionType = {
     type: TypeActionType,
