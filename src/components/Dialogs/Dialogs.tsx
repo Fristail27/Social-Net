@@ -29,10 +29,6 @@ const Dialogs = (props: dialogsPropsType) => {
         props.addMessage()
     };
 
-    alert(props.isAuth)
-
-    if (props.isAuth === false) return <Redirect to={"/login"}/>
-
     return (
         <div>
             <div className={s.dialogs}>
