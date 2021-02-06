@@ -10,7 +10,7 @@ import {
 import Users from "./Users";
 import Preloader from "../common/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
-import Dialogs from "../Dialogs/Dialogs";
+import {compose} from "redux";
 
 class UsersContainer extends React.Component<any, any> {
     componentDidMount() {
@@ -75,8 +75,8 @@ const mapStateToProps = (state: any) => {
 //     }
 // }
 
-let AuthRedirectComponent = WithAuthRedirect(UsersContainer)
-
-export default connect(mapStateToProps, {
-    follow, unfollow, setCurrentPage, ToggleFollowingProgress, getUsers
-})(AuthRedirectComponent)
+export default compose<React.ComponentType>(
+    connect(mapStateToProps, {
+     follow, unfollow, setCurrentPage, ToggleFollowingProgress, getUsers}),
+    WithAuthRedirect
+)(UsersContainer)
