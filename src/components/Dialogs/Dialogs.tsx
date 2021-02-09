@@ -6,7 +6,6 @@ import {
     dialogsDataType,
     messagesDataType
 } from "../../redux/state";
-import { Redirect } from "react-router-dom";
 
 type dialogsPropsType = {
     messagePage: any,

@@ -13,7 +13,7 @@ class ProfileContainer extends React.Component<any, any> {
             userId=13724
         }
 
-        setTimeout(()=>{ this.props.getUserProfile(userId)},200) // timeout что бы убрать баг с отрисовкой пустого инпута статуса после перезагрузки страницы
+        this.props.getUserProfile(userId) // timeout что бы убрать баг с отрисовкой пустого инпута статуса после перезагрузки страницы
         this.props.getStatus(userId)
     }
 
