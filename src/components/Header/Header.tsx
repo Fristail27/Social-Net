@@ -1,6 +1,13 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import { NavLink } from 'react-router-dom';
 import s from "./Header.module.css";
+
+type HeaderPropsType = {
+    getAuthUserData: ()=> void;
+    isAuth: boolean;
+    login: string | null;
+    logout: ()=> void;
+}
 
 const Header = (props:any) => {
     return <header className={s.header}>

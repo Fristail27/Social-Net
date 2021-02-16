@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import { authAPI } from "../api/api";
 import {Input} from "../components/common/formsControl/formsControls";
 import {requiredField} from "../utils/validators/validators";
 import {login} from "../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
+import s from "./../components/common/formsControl/formsControls.module.css"
 
 type FormDataType = {
     email: string;
@@ -25,6 +25,11 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
             </div>
+            {props.error
+            ?<div className={s.formSummaryError}>
+                    {props.error}
+                </div>
+            : ""}
             <div>
                 <button>Log In</button>
             </div>
@@ -34,7 +39,13 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = (props:any) => {
+type LoginPropsType = {
+    login: (email:string, password:string, rememberMe:boolean) => void;
+    isAuth: boolean;
+}
+
+const Login = (props:LoginPropsType) => {
+    debugger
 
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
