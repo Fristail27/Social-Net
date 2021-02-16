@@ -1,7 +1,6 @@
-import profileReducer, {ADD_POST, UPDATE_NEW_POST_TEXT} from "./profile-reducer";
-import dialogsReducer, {ADD_MESSAGE, UPDATE_NEW_MESSAGE_TEXT} from "./dialogs-reducer";
-import sidebarReducer from "./sidebar-reducer";
-import {AuthStateType} from "./auth-reducer";
+import profileReducer, {ADD_POST} from "./profile-reducer";
+import dialogsReducer, {ADD_MESSAGE} from "./dialogs-reducer";
+import sidebarReducer from "./sidebar-reducer";;
 
 export type postsType = {
     id: number,
@@ -36,9 +35,7 @@ export type ActionType = {
 };
 type TypeActionType =
     typeof ADD_POST
-    | typeof UPDATE_NEW_POST_TEXT
     | typeof ADD_MESSAGE
-    | typeof UPDATE_NEW_MESSAGE_TEXT;
 export type StoreType = {
     _state: StateType,
     _callSubscriber: (a?: StateType) => void,

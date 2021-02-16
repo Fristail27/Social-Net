@@ -1,7 +1,6 @@
 import {ActionType} from "./state";
 
 export const ADD_MESSAGE = "ADD_MESSAGE";
-export const UPDATE_NEW_MESSAGE_TEXT = "UPDATE_NEW_MESSAGE_TEXT";
 
 let initialState = {
     messages: [
@@ -15,34 +14,23 @@ let initialState = {
         {id: 3, name: "Alex",},
         {id: 4, name: "Jason",},
     ],
-    newMessageText: "",
 };
 
-const dialogsReducer = (state: any = initialState, action: ActionType): any => {
+const dialogsReducer = (state: any = initialState, action: any): any => {
     switch (action.type) {
         case ADD_MESSAGE:
             return {
                 ...state,
                 messages: [...state.messages, {
                     id: state.messages.length + 1,
-                    message: state.newMessageText
+                    message: action.newMessage
                 }],
-                newMessageText: ""
-            }
-        case UPDATE_NEW_MESSAGE_TEXT:
-            return {
-                ...state,
-                newMessageText: action.newMessageText
             }
         default:
             return state;
     }
 };
 
-export const addMessageActionCreator = (): ActionType => ({type: ADD_MESSAGE});
-export const updateNewMessageTextActionCreator = (text: string): ActionType => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    newMessageText: text
-});
+export const addMessageActionCreator = (newMessage:string): any => ({type: ADD_MESSAGE, newMessage});
 
 export default dialogsReducer;
