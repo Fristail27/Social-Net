@@ -1,11 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import { authAPI } from "../api/api";
 import {Input} from "../components/common/formsControl/formsControls";
 import {requiredField} from "../utils/validators/validators";
+import {login} from "../redux/auth-reducer";
+import {Redirect} from "react-router-dom";
 
 type FormDataType = {
-    login: string;
+    email: string;
     password: string;
     rememberMe: boolean;
 }
@@ -14,10 +17,10 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field validate={[requiredField]} placeholder={"Login"} name={"login"} component={Input}/>
+                <Field validate={[requiredField]} placeholder={"Email"} name={"email"} component={Input}/>
             </div>
             <div>
-                <Field validate={[requiredField]} placeholder={"Password"} name={"password"} component={Input}/>
+                <Field validate={[requiredField]} type={"password"} placeholder={"Password"} name={"password"} component={Input}/>
             </div>
             <div>
                 <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
@@ -31,13 +34,16 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-const Login = () => {
+const Login = (props:any) => {
+
+    if (props.isAuth) {
+        return <Redirect to={"/profile"}/>
+    }
+
     const onSubmit = (formData: FormDataType) => {
-        let { login, password, rememberMe } = formData
+        let { email, password, rememberMe } = formData
         console.log(formData)
-        authAPI.login(login, password)
-            .then(res=>console.log(res))
-            .catch((err)=> console.log(err))
+        props.login(email, password, rememberMe)
     }
     return (
         <div>
@@ -48,5 +54,8 @@ const Login = () => {
     )
 }
 
+const mapStateToProps = (state:any) => ({
+    isAuth: state.auth.isAuth
+})
 
-export default Login
+export default connect(mapStateToProps, {login})(Login)
