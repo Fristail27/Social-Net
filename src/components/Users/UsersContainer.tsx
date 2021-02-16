@@ -11,6 +11,7 @@ import Users from "./Users";
 import Preloader from "../common/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
+import {AppRootStateType} from "../../redux/redux-store";
 
 class UsersContainer extends React.Component<any, any> {
     componentDidMount() {
@@ -41,7 +42,7 @@ class UsersContainer extends React.Component<any, any> {
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: AppRootStateType) => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

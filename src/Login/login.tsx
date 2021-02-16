@@ -6,6 +6,7 @@ import {requiredField} from "../utils/validators/validators";
 import {login} from "../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import s from "./../components/common/formsControl/formsControls.module.css"
+import {AppRootStateType} from "../redux/redux-store";
 
 type FormDataType = {
     email: string;
@@ -44,9 +45,7 @@ type LoginPropsType = {
     isAuth: boolean;
 }
 
-const Login = (props:LoginPropsType) => {
-    debugger
-
+const Login: React.FC<LoginPropsType> = (props) => {
     if (props.isAuth) {
         return <Redirect to={"/profile"}/>
     }
@@ -65,7 +64,7 @@ const Login = (props:LoginPropsType) => {
     )
 }
 
-const mapStateToProps = (state:any) => ({
+const mapStateToProps = (state:AppRootStateType) => ({
     isAuth: state.auth.isAuth
 })
 
