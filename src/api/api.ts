@@ -41,9 +41,33 @@ export const profileAPI = {
     },
 }
 
+// const AuthAPITypes = {
+//     me: typeof {}
+// }
+
+export enum ResultCodesEnum {
+    Success = 0,
+    Error = 1,
+}
+
+export enum ResultCodesForCaptcha {
+    CaptureIsRequired = 10,
+}
+type meResponseType = {
+    data: { id:number, email:string, login:string};
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
+
+type LoginResponseType = {
+    data: {userId:number},
+    resultCode: ResultCodesEnum | ResultCodesForCaptcha
+    messages: Array<string>
+}
+
 export const authAPI = {
     me () {
-        return instance.get(`auth/me`)
+        return instance.get<meResponseType>(`auth/me`)
     },
     login (email:string, password: string, rememberMe: boolean = false) {
         return instance.post('auth/login', {email , password, rememberMe} )

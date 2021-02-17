@@ -12,8 +12,20 @@ import Preloader from "../common/Preloader";
 import {WithAuthRedirect} from "../../hoc/WithAuthRedirect";
 import {compose} from "redux";
 import {AppRootStateType} from "../../redux/redux-store";
+import {UsersStateType} from "../../types/types";
 
-class UsersContainer extends React.Component<any, any> {
+type MapStateToPropsType = UsersStateType
+
+type MapDispatchToProps = {
+    getUsers: (currentPage:number, pageSize: number) => void;
+    follow: (userId:number)=> void;
+    unfollow: (userid: number) => void;
+}
+
+type UsersContainerPropsType = MapStateToPropsType & MapDispatchToProps
+
+
+class UsersContainer extends React.Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
     }
@@ -23,7 +35,6 @@ class UsersContainer extends React.Component<any, any> {
     }
 
     render() {
-
         return (
             <>
                 {this.props.isFetching ? <Preloader/> : null}
@@ -42,7 +53,7 @@ class UsersContainer extends React.Component<any, any> {
     }
 }
 
-const mapStateToProps = (state: AppRootStateType) => {
+const mapStateToProps = (state: AppRootStateType):UsersStateType => {
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,
@@ -53,31 +64,8 @@ const mapStateToProps = (state: AppRootStateType) => {
     }
 }
 
-// const mapDispatchToProps = (dispatch: any) => {
-//     return {
-//         follow: (userId: string) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId: string) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users: any) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber: number) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setUsersTotalCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching:boolean) => {
-//             dispatch(ToggleIsFetchingAC(isFetching))
-//         }
-//     }
-// }
-
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {
-     follow, unfollow, setCurrentPage, ToggleFollowingProgress, getUsers}),
+    connect(mapStateToProps, {  //типизировать connect <MapStateToPros, MapDispatchToProps,AppRootStateType >
+     follow, unfollow, getUsers}),
     WithAuthRedirect
 )(UsersContainer)

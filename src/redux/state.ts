@@ -1,5 +1,5 @@
-import profileReducer, {ADD_POST} from "./profile-reducer";
-import dialogsReducer, {ADD_MESSAGE} from "./dialogs-reducer";
+import  {ADD_POST} from "./profile-reducer";
+import  {ADD_MESSAGE} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";;
 
 export type postsType = {
@@ -80,8 +80,8 @@ let store: StoreType = {
         this._callSubscriber = observer;
     },
     dispatch(action: ActionType) {
-        // this._state.profilePage = profileReducer(this._state.profilePage, action);
-        this._state.messagePage = dialogsReducer(this._state.messagePage, action);
+        // // this._state.profilePage = profileReducer(this._state.profilePage, action);
+        // this._state.messagePage = dialogsReducer(this._state.messagePage, action);
         this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action);
         this._callSubscriber(this._state);
     }

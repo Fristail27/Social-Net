@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import {getAuthUserData, logout, setAuthUserDataActionType} from "../../redux/auth-reducer";
+import {getAuthUserData, logout, SetAuthUserDataActionType} from "../../redux/auth-reducer";
 import {AppRootStateType} from "../../redux/redux-store";
 
 type HeaderContainerPropsType = {
     state:any,
-    setAuthUserDataAC: (id:number, email:string, login:string)=>setAuthUserDataActionType
+    setAuthUserDataAC: (id:number, email:string, login:string)=>SetAuthUserDataActionType
 }
 
 class HeaderContainer extends React.Component<any,HeaderContainerPropsType> {

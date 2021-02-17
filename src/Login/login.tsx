@@ -40,10 +40,14 @@ const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
 
 const LoginReduxForm = reduxForm<FormDataType>({form: 'login'})(LoginForm)
 
-type LoginPropsType = {
-    login: (email:string, password:string, rememberMe:boolean) => void;
-    isAuth: boolean;
+type MapStatePropsType = {
+    isAuth:boolean;
 }
+
+type MapDispatchPropsType = {
+    login: (email:string, password:string, rememberMe:boolean) => void;
+}
+type LoginPropsType = MapStatePropsType & MapDispatchPropsType
 
 const Login: React.FC<LoginPropsType> = (props) => {
     if (props.isAuth) {

@@ -2,6 +2,13 @@ import React from 'react';
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader";
 import ProfileStatus from './ProfileStatus';
+import { ProfileType } from '../../../types/types';
+
+// type ProfileInfoPropsType = {
+//     profile: ProfileType
+//     status: string
+//     updateStatus: (newStatus:string) => void
+// }
 
 const ProfileInfo = (props: any) => {
     if (!props.profile) {

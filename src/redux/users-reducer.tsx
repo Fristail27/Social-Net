@@ -1,5 +1,7 @@
 import {usersAPI} from "../api/api";
 import axios from "axios";
+import {UsersStateType, UserType} from "../types/types";
+import {Dispatch} from "redux";
 
 export const FOLLOW = "FOLLOW";
 export const UNFOLLOW = "UNFOLLOW";
@@ -8,25 +10,6 @@ export const SET_CURRENT_PAGE = "SET_CURRENT_PAGE";
 export const SET_TOTAL_USERS_COUNT = "SET_TOTAL_USERS_COUNT";
 export const TOGGLE_IS_FETCHING = "TOGGLE_IS_FETCHING";
 export const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS"
-
-
-type UserType = {
-    id: number | string
-    photos: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: {city: string, country:string},
-
-}
-type UsersStateType = {
-    users: UserType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage:number
-    isFetching: boolean
-    followingInProgress: number[]
-}
 
 let initialState :UsersStateType = {
     users: [],
@@ -37,7 +20,45 @@ let initialState :UsersStateType = {
     followingInProgress: []
 };
 
-const usersReducer = (state: UsersStateType = initialState, action: any): UsersStateType => {
+type FollowSuccessType = {
+    type: typeof FOLLOW;
+    userId: number;
+}
+type UnfollowSuccessType = {
+    type: typeof UNFOLLOW;
+    userId: number;
+}
+type SetUsersActionType = {
+    type: typeof SET_USERS;
+    users: UserType[];
+}
+type SetCurrentPageActionType = {
+    type: typeof SET_CURRENT_PAGE;
+    currentPage: number;
+}
+type SetUsersTotalCountActionType = {
+    type: typeof SET_TOTAL_USERS_COUNT;
+    totalUsersCount: number;
+}
+type ToggleIsFetchingActionType = {
+    type: typeof TOGGLE_IS_FETCHING;
+    isFetching: boolean
+}
+type ToggleFollowingProgressActionType = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS;
+    isFetching: boolean;
+    userId: number;
+}
+type ActionType =
+    FollowSuccessType
+    | UnfollowSuccessType
+    | SetUsersActionType
+    | SetCurrentPageActionType
+    | SetUsersTotalCountActionType
+    | ToggleIsFetchingActionType
+    | ToggleFollowingProgressActionType
+
+const usersReducer = (state: UsersStateType = initialState, action: ActionType): UsersStateType => {
     switch (action.type) {
         case FOLLOW:
             return  {
@@ -78,15 +99,15 @@ const usersReducer = (state: UsersStateType = initialState, action: any): UsersS
     }
 };
 
-export const followSuccess = (userId:number):any => ({type: FOLLOW, userId});
-export const unfollowSuccess = (userId:number):any => ({type: UNFOLLOW, userId});
-export const setUsersAC = (users:any):any => ({type: SET_USERS, users});
-export const setCurrentPageAC = (currentPage:number):any => ({type: SET_CURRENT_PAGE, currentPage});
-export const setUsersTotalCountAC = (totalUsersCount:number):any => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
-export const ToggleIsFetchingAC = (isFetching:boolean):any => ({type: TOGGLE_IS_FETCHING, isFetching});
-export const ToggleFollowingProgress = (isFetching:boolean, userId:number):any => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
+export const followSuccess = (userId:number):FollowSuccessType => ({type: FOLLOW, userId});
+export const unfollowSuccess = (userId:number):UnfollowSuccessType => ({type: UNFOLLOW, userId});
+export const setUsersAC = (users: Array<UserType>):SetUsersActionType => ({type: SET_USERS, users});
+export const setCurrentPageAC = (currentPage:number):SetCurrentPageActionType => ({type: SET_CURRENT_PAGE, currentPage});
+export const setUsersTotalCountAC = (totalUsersCount:number):SetUsersTotalCountActionType => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
+export const ToggleIsFetchingAC = (isFetching:boolean):ToggleIsFetchingActionType => ({type: TOGGLE_IS_FETCHING, isFetching});
+export const ToggleFollowingProgress = (isFetching:boolean, userId:number):ToggleFollowingProgressActionType => ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId});
 
-export const getUsersThunkCreator = (currentPage:number, pageSize:number) => (dispatch:any) => {
+export const getUsersThunkCreator = (currentPage:number, pageSize:number) => (dispatch: Dispatch<ActionType>) => {
     dispatch(ToggleIsFetchingAC(true))
     dispatch(setCurrentPageAC(currentPage))
     usersAPI.getUsers(currentPage, pageSize).then(data => {
@@ -95,7 +116,7 @@ export const getUsersThunkCreator = (currentPage:number, pageSize:number) => (di
         dispatch(ToggleIsFetchingAC(false))
     })
 };
-export const follow = (userId:number) => (dispatch:any) =>{
+export const follow = (userId:number) => (dispatch:Dispatch<ToggleFollowingProgressActionType | FollowSuccessType>) =>{
     dispatch(ToggleFollowingProgress(true, userId))
     axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
         withCredentials:true,
@@ -103,14 +124,14 @@ export const follow = (userId:number) => (dispatch:any) =>{
             "API-KEY":"29b8c3f6-3989-47ac-8b51-b97568488b2d"
         }
     })
-        .then((response:any) => {
+        .then((response) => {
             if(response.data.resultCode===0) {
                 dispatch(followSuccess(userId))
             }
             dispatch(ToggleFollowingProgress(false, userId))
         })
 }
-export const unfollow = (userId:number) => (dispatch:any) => {
+export const unfollow = (userId:number) => (dispatch:Dispatch<ToggleFollowingProgressActionType | UnfollowSuccessType>) => {
     dispatch(ToggleFollowingProgress(true, userId))
     axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
         withCredentials:true,
