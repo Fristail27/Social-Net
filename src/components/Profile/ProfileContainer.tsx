@@ -17,8 +17,8 @@ type MapStateToPropsType = {
     isAuth: boolean;
 }
 type MapDispatchToProps = {
-    getUserProfile: (userId:string) => void
-    getStatus: (userId:string) => void
+    getUserProfile: (userId:number) => void
+    getStatus: (userId:number) => void
     updateStatus: (status:string) => void
 }
 type OwnComponentPropsType = MapStateToPropsType & MapDispatchToProps
@@ -29,11 +29,14 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     componentDidMount() {
         let userId = this.props.match.params.userId
         if (!userId) {
-            userId="13250"
+            userId=this.props.authorizedUserId.toString()
+            if (!userId) {
+                this.props.history.push("/login")
+            }
         }
 
-        this.props.getUserProfile(userId) // timeout что бы убрать баг с отрисовкой пустого инпута статуса после перезагрузки страницы
-        this.props.getStatus(userId)
+        this.props.getUserProfile(userId as any)
+        this.props.getStatus(userId as any)
     }
 
     render() {

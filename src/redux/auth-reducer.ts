@@ -1,14 +1,13 @@
 import { Dispatch } from "redux";
 import { stopSubmit } from "redux-form";
 import {authAPI, ResultCodesEnum} from "../api/api";
-import {ThunkAction} from "redux-thunk";
 
 export const SET_USER_DATA = "SET_USER_DATA";
 
 export type SetAuthUserDataActionType = {
     type: typeof SET_USER_DATA
     payload: {
-        id:number | null
+        userId:number | null
         email:string | null
         login:string | null
         isAuth:boolean
@@ -39,13 +38,13 @@ const authReducer = (state = initialState, action: ActionType): AuthStateType =>
     }
 };
 
-export const setAuthUserDataAC = (id:number | null, email:string|null, login:string|null, isAuth:boolean):SetAuthUserDataActionType => ({
+export const setAuthUserDataAC = (userId:number | null, email:string|null, login:string|null, isAuth:boolean):SetAuthUserDataActionType => ({
     type: SET_USER_DATA,
-    payload:{id, email, login, isAuth}
+    payload:{userId, email, login, isAuth}
 });
 
 export const getAuthUserData = () => (dispatch:Dispatch<SetAuthUserDataActionType>) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if(response.data.resultCode === ResultCodesEnum.Success) {
                 const {id, email, login} = response.data.data
