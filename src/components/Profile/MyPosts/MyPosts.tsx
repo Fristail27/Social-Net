@@ -33,7 +33,6 @@ type FormPostType = {
 const maxLength10 = maxLengthCreator(10)
 
 const AddNewPostForm: React.FC<InjectedFormProps<FormPostType>> = (props) => {
-    console.log("rendering")
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
