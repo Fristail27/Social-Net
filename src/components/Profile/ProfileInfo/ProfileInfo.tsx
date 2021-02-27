@@ -2,16 +2,10 @@ import React from 'react';
 import s from "./ProfileInfo.module.css"
 import Preloader from "../../common/Preloader";
 import ProfileStatus from './ProfileStatus';
-import { ProfileType } from '../../../types/types';
+import {ProfileAndProfileInfoPropsType} from "../../../types/types";
 
-// type ProfileInfoPropsType = {
-//     profile: ProfileType
-//     status: string
-//     updateStatus: (newStatus:string) => void
-// }
-
-const ProfileInfo = (props: any) => {
-    if (!props.profile) {
+const ProfileInfo:React.FC<ProfileAndProfileInfoPropsType> = ({profile, status, updateStatus}) => {
+    if (!profile) {
         return <Preloader/>
     }
     return (
@@ -20,8 +14,8 @@ const ProfileInfo = (props: any) => {
             {/*    <img src="https://caspian.travel/upload/tours/sulak_derbent/sul_derb_slide_1.jpg" alt=""/>*/}
             {/*</div>*/}
             <div className={s.descriptionBlock}>
-                <img className={s.photoLarge} src={props.profile.photos.large} alt=""/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+                <img className={s.photoLarge} src={profile.photos.large as string} alt=""/>
+                <ProfileStatus status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )

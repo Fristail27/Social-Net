@@ -22,7 +22,7 @@ type MapDispatchToProps = {
     updateStatus: (status:string) => void
 }
 type OwnComponentPropsType = MapStateToPropsType & MapDispatchToProps
-type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnComponentPropsType
+export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> & OwnComponentPropsType
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
@@ -41,9 +41,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
     render() {
         return (
-            <Profile {...this.props}
-                     profile={this.props.profile}
-                     status={this.props.status}/>
+            <Profile profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}/>
         )
     }
 }

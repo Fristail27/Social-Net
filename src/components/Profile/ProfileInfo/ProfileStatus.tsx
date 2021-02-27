@@ -18,14 +18,12 @@ const ProfileStatus = (props: ProfileStatusPropsType) => {
 
     const [state, setState] = useState<ProfileStatusStateType>(initState)
 
-    useEffect(()=> {
-        if (state.status !== props.status) {
-            setState({
-                ...state,
-                status: props.status
-            })
-        }
-    },[props.status])
+    useEffect(() => {
+        setState({
+            ...state,
+            status: props.status
+        })
+    }, [props.status])
 
     const activateEditMode = () => {
         setState({

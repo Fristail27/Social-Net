@@ -1,10 +1,12 @@
 export type UserType = {
-    id: number | string
-    photos: string
-    followed: boolean
-    fullName: string
+    id: any
+    name: string
     status: string
-    location: {city: string, country:string}
+    photos: {
+        small: (string)
+        large: (string)
+    }
+    followed: boolean
 }
 export type UsersStateType = {
     users: UserType[]
@@ -43,6 +45,12 @@ export type ProfileType = {
     fullName: string;
     lookingForAJob: boolean;
     lookingForAJobDescription: string | null;
-    photos: {small: string | null, large: string | null} | undefined
+    photos: {small: string | null, large: string | null}
     userId: number
+}
+
+export type ProfileAndProfileInfoPropsType = {
+    profile: ProfileType
+    status: string
+    updateStatus: (newStatus:string) => void
 }

@@ -1,12 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
-import {Field, InjectedFormProps, reduxForm} from "redux-form";
-import {Input} from "../components/common/formsControl/formsControls";
-import {requiredField} from "../utils/validators/validators";
+import {InjectedFormProps, reduxForm} from "redux-form";
+import {createField} from "../components/common/formsControl/formsControls";
 import {login} from "../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
 import s from "./../components/common/formsControl/formsControls.module.css"
 import {AppRootStateType} from "../redux/redux-store";
+import {requiredField} from "../utils/validators/validators";
 
 type FormDataType = {
     email: string;
@@ -14,21 +14,15 @@ type FormDataType = {
     rememberMe: boolean;
 }
 
-const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props) => {
+const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field validate={[requiredField]} placeholder={"Email"} name={"email"} component={Input}/>
-            </div>
-            <div>
-                <Field validate={[requiredField]} type={"password"} placeholder={"Password"} name={"password"} component={Input}/>
-            </div>
-            <div>
-                <Field type={"checkbox"} name={"rememberMe"} component={Input}/> remember me
-            </div>
-            {props.error
+        <form onSubmit={handleSubmit}>
+            {createField("Email", "email", null, null, [requiredField])}
+            {createField("Password", "password", "password", null, [requiredField])}
+            {createField(null, "rememberMe", "checkbox", "remember me", null)}
+            {error
             ?<div className={s.formSummaryError}>
-                    {props.error}
+                    {error}
                 </div>
             : ""}
             <div>
@@ -49,15 +43,15 @@ type MapDispatchPropsType = {
 }
 type LoginPropsType = MapStatePropsType & MapDispatchPropsType
 
-const Login: React.FC<LoginPropsType> = (props) => {
-    if (props.isAuth) {
+const Login: React.FC<LoginPropsType> = ({isAuth, login}) => {
+    if (isAuth) {
         return <Redirect to={"/profile"}/>
     }
 
     const onSubmit = (formData: FormDataType) => {
         let { email, password, rememberMe } = formData
         console.log(formData)
-        props.login(email, password, rememberMe)
+        login(email, password, rememberMe)
     }
     return (
         <div>

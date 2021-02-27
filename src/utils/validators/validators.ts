@@ -1,5 +1,5 @@
 export  const requiredField = (value:string) => {
-    if (value) return undefined
+    if (value) return null
     return "error message"
 }
 

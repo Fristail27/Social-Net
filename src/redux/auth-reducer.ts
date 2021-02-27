@@ -43,35 +43,31 @@ export const setAuthUserDataAC = (userId:number | null, email:string|null, login
     payload:{userId, email, login, isAuth}
 });
 
-export const getAuthUserData = () => (dispatch:Dispatch<SetAuthUserDataActionType>) => {
-    return authAPI.me()
-        .then(response => {
-            if(response.data.resultCode === ResultCodesEnum.Success) {
-                const {id, email, login} = response.data.data
-                dispatch(setAuthUserDataAC(id, email, login, true))
-            }
-        })
+export const getAuthUserData = () => async (dispatch: Dispatch<SetAuthUserDataActionType>) => {
+    const response = await authAPI.me()
+
+    if (response.data.resultCode === ResultCodesEnum.Success) {
+        const {id, email, login} = response.data.data
+        dispatch(setAuthUserDataAC(id, email, login, true))
+    }
 }
 
-export const login = (email:string, password:string, rememberMe:boolean) => (dispatch:any) => {
-    authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if(response.data.resultCode === ResultCodesEnum.Success) {
-                dispatch(getAuthUserData())
-            } else {
-                const message = (response.data.messages.length > 0) ? response.data.messages[0] : "some error"
-                dispatch(stopSubmit("login", {_error: message}))
-            }
-        })
+export const login = (email: string, password: string, rememberMe: boolean) => async (dispatch: any) => {
+    const response = await authAPI.login(email, password, rememberMe)
+
+    if (response.data.resultCode === ResultCodesEnum.Success) {
+        dispatch(getAuthUserData())
+    } else {
+        const message = (response.data.messages.length > 0) ? response.data.messages[0] : "some error"
+        dispatch(stopSubmit("login", {_error: message}))
+    }
 }
 
-export const logout = ()=> (dispatch:Dispatch<SetAuthUserDataActionType>) => {
-    authAPI.logout()
-        .then(response => {
-            if(response.data.resultCode ===0) {
-                dispatch(setAuthUserDataAC(null, null, null, false))
-            }
-        })
+export const logout = () => async (dispatch: Dispatch<SetAuthUserDataActionType>) => {
+    const response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserDataAC(null, null, null, false))
+    }
 }
 
 export default authReducer;
