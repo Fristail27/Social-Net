@@ -1,22 +1,30 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from "./ProfileInfo.module.css"
+import userPhoto from "../../../Assets/images/user.jpg"
 import Preloader from "../../common/Preloader";
 import ProfileStatus from './ProfileStatus';
 import {ProfileAndProfileInfoPropsType} from "../../../types/types";
 
-const ProfileInfo:React.FC<ProfileAndProfileInfoPropsType> = ({profile, status, updateStatus}) => {
+const ProfileInfo: React.FC<ProfileAndProfileInfoPropsType> = ({profile, status, updateStatus, isOwner, savePhoto}) => {
+
     if (!profile) {
         return <Preloader/>
     }
+
+    const onMainPhotoSelector = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files){
+            if (e.target.files.length) {
+                savePhoto(e.target.files[0])
+            }
+        }
+
+    }
+
     return (
-        <div>
-            {/*<div>*/}
-            {/*    <img src="https://caspian.travel/upload/tours/sulak_derbent/sul_derb_slide_1.jpg" alt=""/>*/}
-            {/*</div>*/}
-            <div className={s.descriptionBlock}>
-                <img className={s.photoLarge} src={profile.photos.large as string} alt=""/>
-                <ProfileStatus status={status} updateStatus={updateStatus}/>
-            </div>
+        <div className={s.descriptionBlock}>
+            <img className={s.photoLarge} src={profile.photos.large as string || userPhoto} alt=""/>
+            {isOwner && <input onChange={onMainPhotoSelector} type={"file"}/>}
+            <ProfileStatus status={status} updateStatus={updateStatus}/>
         </div>
     )
 }

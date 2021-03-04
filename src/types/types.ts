@@ -39,13 +39,18 @@ export type ContactsType = {
     website: string | null;
     youtube: string | null;
 }
+export type PhotoInProfileType = {
+    small: string | null
+    large: string | null
+}
+
 export type ProfileType = {
     aboutMe: string | null;
     contacts: ContactsType
     fullName: string;
     lookingForAJob: boolean;
     lookingForAJobDescription: string | null;
-    photos: {small: string | null, large: string | null}
+    photos: PhotoInProfileType
     userId: number
 }
 
@@ -53,4 +58,6 @@ export type ProfileAndProfileInfoPropsType = {
     profile: ProfileType
     status: string
     updateStatus: (newStatus:string) => void
+    isOwner:boolean
+    savePhoto: (file:any)=> void
 }
