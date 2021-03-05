@@ -60,4 +60,5 @@ export type ProfileAndProfileInfoPropsType = {
     updateStatus: (newStatus:string) => void
     isOwner:boolean
     savePhoto: (file:any)=> void
+    saveProfile: (profile:any) => Promise<any>
 }

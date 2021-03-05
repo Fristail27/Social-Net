@@ -50,7 +50,6 @@ const Login: React.FC<LoginPropsType> = ({isAuth, login}) => {
 
     const onSubmit = (formData: FormDataType) => {
         let { email, password, rememberMe } = formData
-        console.log(formData)
         login(email, password, rememberMe)
     }
     return (
