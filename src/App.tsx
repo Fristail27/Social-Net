@@ -1,11 +1,7 @@
 import React, {ComponentType, Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Route, withRouter} from 'react-router-dom';
-// import DialogsContainer from "./components/Dialogs/DialogsContainer";
-// import UsersContainer from "./components/Users/UsersContainer";
-// import ProfileContainer from "./components/Profile/ProfileContainer";
-// import HeaderContainer from "./components/Header/HeaderContainer";
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 import Login from "./Login/login";
 import {connect} from 'react-redux';
 import {compose} from 'redux';
@@ -24,26 +20,38 @@ type AppPropsType = {
 }
 
 class App extends React.Component<AppPropsType> {
+
+    catchAllUnhandledError (reason:any) {
+        alert("Some Error occured")
+    }
+
     componentDidMount() {
         this.props.initializeAppTC()
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledError)
+    }
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledError)
     }
 
     render() {
         if (!this.props.initialized) return <Preloader/>
         return (
 
-                <div className='app-wrapper'>
-                    <Suspense fallback={<div>Загрузка...</div>}>
-                        <HeaderContainer/>
-                        <Navbar/>
-                        <div className="app-wrapper-content">
-                        <Route path="/dialogs" render={() => <DialogsContainer/>}/> {/* 1 вариант*/}
-                        <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/> {/* 2 вариант*/}
-                        <Route path="/users" render={() => <UsersContainer/>}/>
-                        <Route path="/login" render={() => <Login/>}/>
-
-                </div>
-                    </Suspense>
+            <div className='app-wrapper'>
+                <Suspense fallback={<div>Загрузка...</div>}>
+                    <HeaderContainer/>
+                    <Navbar/>
+                    <div className="app-wrapper-content">
+                        <Switch>
+                            <Route exact path="/" render={() => <Redirect to={"/profile"}/>}/>
+                            <Route path="/dialogs" render={() => <DialogsContainer/>}/>
+                            <Route path="/profile/:userId?" render={() => <ProfileContainer/>}/>
+                            <Route path="/users" render={() => <UsersContainer/>}/>
+                            <Route path="/login" render={() => <Login/>}/>
+                            <Route path="*" render={() => <div>404</div>}/>
+                        </Switch>
+                    </div>
+                </Suspense>
             </div>
         );
     }

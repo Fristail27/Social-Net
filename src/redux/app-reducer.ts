@@ -8,7 +8,8 @@ export type initiolizedSuccessActionType = {
 }
 
 let initialState  = {
-    initialized: false as boolean
+    initialized: false as boolean,
+    globalError: null as string | null
 };
 
 type AuthStateType = typeof  initialState
